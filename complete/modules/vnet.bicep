@@ -32,7 +32,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
   }
 }
 
-resource azhop_to_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2023-05-01' = {
+resource vnetPeering 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2023-05-01' = {
   name: '${peeredResourceGroupName}-${peeredVnetName}'
   parent: vnet
   properties: {
