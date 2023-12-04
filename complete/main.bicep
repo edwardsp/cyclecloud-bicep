@@ -11,7 +11,6 @@ param adminPassword string
 param peeredVnetName string
 param peeredResourceGroupName string
 
-
 var cycleVmName = 'cycleVm'
 var vnetName = 'cyclevnet'
 
@@ -61,9 +60,6 @@ module roleAssignmentSub './modules/roleAssignmentsSub.bicep' = {
   params: {
     principalId: cycleVm.outputs.cycleManagedIdentity
   }
-  dependsOn: [
-    rg
-  ]
 }
 module roleAssignmentRg './modules/roleAssignmentsRg.bicep' = {
   scope: rg

@@ -9,7 +9,22 @@ resource nsg 'Microsoft.Network/networkSecurityGroups@2022-07-01' = {
   name: '${vnetName}-nsg'
   location: location
   properties: {
-    securityRules: []
+    securityRules: [
+      {
+        name: 'AllowVnetSSHInBound'
+        properties: {
+          description: 'Allow SSH/RDP access within vnet'
+          protocol: 'tcp'
+          sourcePortRange: '*'
+          destinationPortRange: '22'
+          sourceAddressPrefix: 'VirtualNetwork'
+          destinationAddressPrefix: 'VirtualNetwork'
+          access: 'Allow'
+          priority: 100
+          direction: 'Inbound'
+        }
+      }
+    ]
   }
 }
 

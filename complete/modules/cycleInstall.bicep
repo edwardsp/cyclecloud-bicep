@@ -13,8 +13,13 @@ param logsUri string
 
 var script = loadTextContent('cycleInstall.sh')
 
+resource cc 'Microsoft.Compute/virtualMachines@2023-07-01' existing = {
+  name: cycleVm
+}
+
 resource cycleInstall 'Microsoft.Compute/virtualMachines/runCommands@2023-03-01' = {
-  name: '${cycleVm}/cycleInstall'
+  parent: cc
+  name: 'cycleInstall'
   location: location
   properties: {
     asyncExecution: false
